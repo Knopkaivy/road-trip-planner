@@ -80,3 +80,13 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+
+@media (max-width: v.$bp-sm){
+  .card{
+    padding: v.$space-md;
+  }
+
+  .tip{
+      padding: v.$space-sm;
+  }
+}

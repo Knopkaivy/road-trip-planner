@@ -29,7 +29,7 @@ export default function ItineraryView(){
 
                         <div className={styles.divider}></div>
                         <div className={styles.stat}>
-                            <span className={styles.statValue}>{itinerary.vibe.charAt(0).toUpperCase() + itinerary.vibe.slice(1)}</span>
+                            <span className={styles.statValue}>{itinerary.vibe}</span>
                             <span className={styles.statLabel}>Vibe</span>
                         </div>
                     </div>

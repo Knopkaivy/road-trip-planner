@@ -32,7 +32,7 @@
 
 .title {
   color: var(--color-text);
-  font-size: v.$font-size-md;
+  font-size: v.$font-size-lg;
   font-weight: 600;
   margin: 0;
   line-height: 1.3;
@@ -70,7 +70,7 @@
   flex: 1;
   min-width: 2rem;
   height: 2px;
-  background: var(--color-surface-muted);
+  background: var(--color-border-subtle);
 }
 
 .miles {
@@ -95,5 +95,20 @@
 
   strong {
     color: var(--color-text);
+  }
+}
+
+@media (max-width: v.$bp-sm){
+  .card{
+    border-radius: 0;
+    padding: v.$space-md;
+  }
+
+  .dayBadge {
+    padding: v.$space-sm;
+  }
+
+  .title {
+    font-size: v.$font-size-md;
   }
 }

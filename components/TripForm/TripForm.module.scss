@@ -17,6 +17,10 @@
   padding: v.$space-2xl;
   width: 100%;
   max-width: v.$max-width;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .title {
@@ -102,5 +106,16 @@
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+}
+
+@media (max-width: v.$bp-sm){
+  .wrapper{
+    padding: 0;
+  }
+
+  .card{
+    height: 100vh;
+    padding: v.$space-md;
   }
 }

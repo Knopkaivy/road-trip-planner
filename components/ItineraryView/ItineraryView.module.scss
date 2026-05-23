@@ -9,7 +9,7 @@
 // --- Hero ---
 .hero {
   background: var(--color-bg-primary);
-  padding: v.$space-xl v.$space-xl;
+  padding: v.$space-xl;
 }
 
 .heroInner {
@@ -56,6 +56,7 @@
   font-size: v.$font-size-md;
   font-weight: 700;
   line-height: 1;
+  text-transform: capitalize;
 }
 
 .statLabel {
@@ -117,5 +118,24 @@
 
   &:hover {
     background: var(--color-accent-muted);
+  }
+}
+
+@media (max-width: v.$bp-sm){
+  .hero{
+    padding: v.$space-lg;
+  }
+
+  .content {
+    padding: 0;
+  }
+
+  .footer{
+    padding-left: v.$space-md;
+    padding-right: v.$space-md;
+  }
+
+  .resetButton{
+    width: 100%;
   }
 }

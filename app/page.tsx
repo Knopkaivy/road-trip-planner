@@ -8,7 +8,7 @@ import ItineraryView from "@/components/ItineraryView/ItineraryView";
 export default function Home() {
   const {itinerary, isLoading} = useTripStore()
 
-  if(isLoading) return <LoadingState/>
+if(isLoading)   return <LoadingState/>
   if(itinerary) return <ItineraryView/>
   return <TripForm/>
 

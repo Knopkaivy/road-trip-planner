@@ -25,8 +25,8 @@ $color-surface-muted-accent:  rgba($color-accent, 0.1);
 //Font
 $font-size-xs: .875rem;
 $font-size-sm: 1rem;
-$font-size-md: 1.4rem;
-$font-size-lg: 1.6rem;
+$font-size-md: 1.25rem;
+$font-size-lg: 1.4rem;
 $font-size-xl: 2.5rem;
 
 // Spacing
@@ -49,3 +49,9 @@ $radius-xl: .5rem;
 // Transitions
 $transition-fast: 0.2s ease;
 $transition-base: 0.3s ease;
+
+// Breakpoints
+$bp-sm:  480px;
+$bp-md:  768px;
+$bp-lg:  1024px;
+$bp-xl:  1280px;
