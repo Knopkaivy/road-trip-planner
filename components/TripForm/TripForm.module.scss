@@ -6,14 +6,14 @@
   align-items: center;
   justify-content: center;
   padding: v.$space-xl;
-  background: linear-gradient(135deg, v.$color-bg-primary 0%, v.$color-bg-secondary 50%, v.$color-bg-tertiary 100%);
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 50%, var(--color-bg-tertiary) 100%);
 }
 
 .card {
-  background: v.$color-surface;
+  background: var(--color-surface);
   backdrop-filter: blur(10px);
-  border: 1px solid v.$color-border;
-  border-radius: v.$radius-xl;
+  border: 1px solid var(--color-border);
+  border-radius: v.$radius-md;
   padding: v.$space-2xl;
   width: 100%;
   max-width: v.$max-width;
@@ -22,13 +22,13 @@
 .title {
   font-size: 2rem;
   font-weight: 700;
-  color: v.$color-text;
+  color: var(--color-text);
   margin: 0 0 v.$space-sm;
   text-align: center;
 }
 
 .subtitle {
-  color: v.$color-text-secondary;
+  color: var(--color-text-secondary);
   text-align: center;
   margin: 0 0 v.$space-2xl;
   font-size: v.$font-size-xs;
@@ -47,7 +47,7 @@
   gap: v.$space-sm;
 
   label {
-    color: v.$color-text-secondary;
+    color: var(--color-text-secondary);
     font-size: v.$font-size-xs;
     font-weight: 500;
     letter-spacing: 0.02em;
@@ -55,10 +55,10 @@
 
   input,
   select {
-    background: v.$color-surface-hover;
-    border: 1px solid v.$color-border;
+    background: var(--color-surface-hover);
+    border: 1px solid var(--color-border);
     border-radius: v.$radius-md;
-    color: v.$color-text;
+    color: var(--color-text);
     font-size: v.$font-size-sm;
     padding: v.$space-md;
     transition: border-color 0.2s, background 0.2s;
@@ -66,42 +66,37 @@
     box-sizing: border-box;
 
     &::placeholder {
-      color: v.$color-text-muted;
+      color: var(--color-text-muted);
     }
 
     &:focus {
       outline: none;
-      border-color: v.$color-accent;
-      background: v.$color-surface-hover;
+      border-color: var(--color-accent);
+      background: var(--color-surface-hover);
     }
 
     option {
-      background: v.$color-bg-secondary;
-      color: v.$color-text;
+      background: var(--color-bg-secondary);
+      color: var(--color-text);
     }
   }
 }
 
 .button {
-  background: v.$color-accent;
+  background: var(--color-accent);
   border: none;
   border-radius: v.$radius-md;
-  color: v.$color-text;
+  color: var(--color-text);
   cursor: pointer;
   font-size: v.$font-size-sm;
   font-weight: 600;
   margin-top: v.$space-sm;
   padding: v.$space-md;
-  transition: background 0.2s, transform 0.1s;
+  transition: background 0.2s;
   width: 100%;
 
   &:hover:not(:disabled) {
-    background: v.$color-accent-muted;
-    transform: translateY(-1px);
-  }
-
-  &:active:not(:disabled) {
-    transform: translateY(0);
+    background: var(--color-accent-muted);
   }
 
   &:disabled {

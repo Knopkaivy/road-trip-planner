@@ -1,8 +1,8 @@
 @use '@/app/variables' as v;
 
 .card {
-  background: v.$color-surface;
-  border: 1px solid v.$color-border;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: v.$radius-md;
   padding: v.$space-xl;
   display: flex;
@@ -18,8 +18,8 @@
 }
 
 .dayBadge {
-  background: v.$color-accent;
-  color: v.$color-text;
+  background: var(--color-accent);
+  color: var(--color-text);
   font-size: v.$font-size-xs;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -31,7 +31,7 @@
 }
 
 .title {
-  color: v.$color-text;
+  color: var(--color-text);
   font-size: v.$font-size-md;
   font-weight: 600;
   margin: 0;
@@ -50,7 +50,7 @@
   display: flex;
   align-items: center;
   gap: v.$space-sm;
-  color: v.$color-text-secondary;
+  color: var(--color-text-secondary);
   font-size: v.$font-size-xs;
 }
 
@@ -58,11 +58,11 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: v.$color-text-secondary;
+  background: var(--color-text-secondary);
   flex-shrink: 0;
 
   &[data-end='true'] {
-    background: v.$color-accent;
+    background: var(--color-accent);
   }
 }
 
@@ -70,11 +70,11 @@
   flex: 1;
   min-width: 2rem;
   height: 2px;
-  background: v.$color-surface-muted;
+  background: var(--color-surface-muted);
 }
 
 .miles {
-  color: v.$color-text-muted;
+  color: var(--color-text-muted);
   font-size: v.$font-size-xs;
   margin-left: auto;
 }
@@ -88,12 +88,12 @@
 
 // --- Overnight ---
 .overnight {
-  color: v.$color-text-secondary;
+  color: var(--color-text-secondary);
   font-size: v.$font-size-xs;
   padding-top: v.$space-sm;
-  border-top: 1px solid v.$color-border-subtle;
+  border-top: 1px solid var(--color-border-subtle);
 
   strong {
-    color: v.$color-text;
+    color: var(--color-text);
   }
 }

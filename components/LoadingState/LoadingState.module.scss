@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   padding: v.$space-xl;
-  background: linear-gradient(135deg, v.$color-bg-primary 0%, v.$color-bg-secondary 50%, v.$color-bg-tertiary 100%);
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 50%, var(--color-bg-tertiary) 100%);
 }
 
 .card {
@@ -20,7 +20,7 @@
 
 // --- Title ---
 .title {
-  color: v.$color-text;
+  color: var(--color-text);
   font-size: v.$font-size-md;
   font-weight: 600;
 }
@@ -35,7 +35,7 @@
 .message {
   position: absolute;
   width: 100%;
-  color: v.$color-text-secondary;
+  color: var(--color-text-secondary);
   font-size: v.$font-size-sm;
   opacity: 0;
   animation: cycle 20s ease-in-out infinite;
@@ -63,7 +63,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: v.$color-accent;
+    background: var(--color-accent);
     display: block;
     animation: bounce 0.8s ease-in-out infinite;
   }

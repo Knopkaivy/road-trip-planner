@@ -1,3 +1,64 @@
+:root{
+  // Raw channels for rgba() usage
+  --color-accent-rgb:  233, 69, 96;
+  --color-text-rgb:    255, 255, 255;
+
+  --color-bg-primary:    #1a1a2e;
+  --color-bg-secondary:  #16213e;
+  --color-bg-tertiary:   #0f3460;
+  --color-accent:        rgb(var(--color-accent-rgb));
+  --color-accent-muted:  #c73652;
+
+
+  // Text
+  --color-text:          rgb(var(--color-text-rgb));
+  --color-text-primary:   rgba(var(--color-text-rgb), 1);
+  --color-text-secondary: rgba(var(--color-text-rgb), .7);
+  --color-text-muted:     rgba(var(--color-text-rgb), .45);
+
+  // Borders
+  --color-border:         rgba(var(--color-text-rgb), .1);
+  --color-border-subtle:  rgba(var(--color-text-rgb), .07);
+  --color-border-accent:  rgba(var(--color-accent-rgb), 0.2);
+
+  // Surfaces
+  --color-surface:        rgba(var(--color-text-rgb), .03);
+  --color-surface-hover:  rgba(var(--color-text-rgb), .07);
+  --color-surface-muted:  rgba(var(--color-text-rgb), .4);
+  --color-surface-muted-accent:  rgba(var(--color-accent-rgb), 0.1);
+}
+
+[data-theme="light"]{
+    // Raw channels for rgba() usage
+    --color-accent-rgb:  224, 54, 36;
+    --color-text-rgb:    26, 26, 26;
+    --color-bg-primary-rgb: 248, 247, 244;
+
+    --color-bg-primary:    rgb(var(--color-bg-primary-rgb));
+    --color-bg-secondary:  #fdfdfc;
+    --color-bg-tertiary:   #fefefd;
+    --color-accent:        rgb(var(--color-accent-rgb));
+    --color-accent-muted:  #fe5239;
+
+
+    // Text
+    --color-text:          rgb(var(--color-text-rgb));
+    --color-text-primary:   rgba(var(--color-text-rgb), 1);
+    --color-text-secondary: rgba(var(--color-text-rgb), .85);
+    --color-text-muted:     rgba(var(--color-text-rgb), .65);
+
+    // Borders
+    --color-border:         rgba(var(--color-text-rgb), .1);
+    --color-border-subtle:  rgba(var(--color-text-rgb), .07);
+    --color-border-accent:  rgba(var(--color-accent-rgb), 0.2);
+
+    // Surfaces
+    --color-surface:        rgba(var(--color-bg-primary-rgb), .03);
+    --color-surface-hover:  rgba(var(--color-bg-primary-rgb), .07);
+    --color-surface-muted:  rgba(var(--color-bg-primary-rgb), .4);
+    --color-surface-muted-accent:  rgba(var(--color-accent-rgb), 0.1);
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

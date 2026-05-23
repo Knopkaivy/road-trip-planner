@@ -1,14 +1,14 @@
 @use '@/app/variables' as v;
 
 .wrapper {
-  background: linear-gradient(135deg, v.$color-bg-primary 0%, v.$color-bg-secondary 50%, v.$color-bg-tertiary 100%);
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 50%, var(--color-bg-tertiary) 100%);
   height: 100vh;
   overflow-y: auto;
 }
 
 // --- Hero ---
 .hero {
-  background: v.$color-bg-primary;
+  background: var(--color-bg-primary);
   padding: v.$space-xl v.$space-xl;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .eyebrow {
-  color: v.$color-accent;
+  color: var(--color-accent);
   font-size: v.$font-size-xs;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -30,7 +30,7 @@
 }
 
 .title {
-  color: v.$color-text;
+  color: var(--color-text);
   font-size: clamp(v.$font-size-lg, 4vw, v.$font-size-xl);
   font-weight: 700;
   margin: 0;
@@ -52,14 +52,14 @@
 }
 
 .statValue {
-  color: v.$color-text;
+  color: var(--color-text);
   font-size: v.$font-size-md;
   font-weight: 700;
   line-height: 1;
 }
 
 .statLabel {
-  color: v.$color-text-muted;
+  color: var(--color-text-muted);
   font-size: v.$font-size-xs;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -68,7 +68,7 @@
 .divider {
   width: 1px;
   height: 2rem;
-  background: v.$color-border;
+  background: var(--color-border);
 }
 
 // --- Content ---
@@ -95,20 +95,20 @@
   align-items: center;
   gap: v.$space-md;
   padding: v.$space-xl 0;
-  border-top: 1px solid v.$color-border-subtle;
+  border-top: 1px solid var(--color-border-subtle);
 
   p {
-    color: v.$color-text-muted;
+    color: var(--color-text-muted);
     font-size: v.$font-size-sm;
     margin: 0;
   }
 }
 
 .resetButton {
-  background: v.$color-accent;
+  background: var(--color-accent);
   border: none;
   border-radius: v.$radius-md;
-  color: v.$color-text;
+  color: var(--color-text);
   cursor: pointer;
   font-size: v.$font-size-sm;
   font-weight: 600;
@@ -116,6 +116,6 @@
   transition: background 0.2s;
 
   &:hover {
-    background: v.$color-accent-muted;
+    background: var(--color-accent-muted);
   }
 }

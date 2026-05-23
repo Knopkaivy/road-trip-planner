@@ -1,8 +1,8 @@
 @use '@/app/variables' as v;
 
 .card {
-  background: v.$color-surface;
-  border: 1px solid v.$color-border-subtle;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
   border-radius: v.$radius-md;
   padding: v.$space-lg;
   display: flex;
@@ -11,8 +11,8 @@
   transition: background 0.2s, border-color 0.2s;
 
   &:hover {
-    background: v.$color-surface-hover;
-    border-color: v.$color-border;
+    background: var(--color-surface-hover);
+    border-color: var(--color-border);
   }
 }
 
@@ -37,7 +37,7 @@
 }
 
 .name {
-  color: v.$color-text;
+  color: var(--color-text);
   font-size: v.$font-size-sm;
   font-weight: 600;
   margin: 0;
@@ -45,20 +45,20 @@
 }
 
 .duration {
-  color: v.$color-text-muted;
+  color: var(--color-text-muted);
   font-size: v.$font-size-xs;
 }
 
 .description {
-  color: v.$color-text-secondary;
+  color: var(--color-text-secondary);
   font-size: v.$font-size-xs;
   line-height: 1.6;
   margin: 0;
 }
 
 .tip {
-  background: v.$color-surface-muted-accent;
-  border: 1px solid v.$color-border-accent;
+  background: var(--color-surface-muted-accent);
+  border: 1px solid var(--color-border-accent);
   border-radius: v.$radius-md;
   padding: v.$space-md;
   display: flex;
@@ -66,7 +66,7 @@
   gap: v.$space-sm;
 
   p {
-    color: v.$color-text-secondary;
+    color: var(--color-text-secondary);
     font-size: v.$font-size-xs;
     line-height: 1.5;
     margin: 0;
@@ -74,7 +74,7 @@
 }
 
 .tipLabel {
-  color: v.$color-accent;
+  color: var(--color-accent);
   font-size: v.$font-size-xs;
   font-weight: 600;
   letter-spacing: 0.04em;
