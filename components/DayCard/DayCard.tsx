@@ -24,7 +24,7 @@ export default function DayCard({day}: DayCardProps){
                     <span className={styles.dot} data-end="true"></span>
                     <span>{day.to}</span>
                 </div>
-                <div className={styles.miles}>🛣 {day.miles} miles</div>
+                <div className={styles.miles}>{day.miles} miles</div>
             </div>
 
             <div className={styles.stops}>
@@ -33,7 +33,7 @@ export default function DayCard({day}: DayCardProps){
                 ))}
             </div>
 
-            <div className={styles.overnight}>🌙 Overnight in <strong>{day.overnight}</strong></div>
+            <div className={styles.overnight}>Overnight in <strong>{day.overnight}</strong></div>
         </div>
 
 

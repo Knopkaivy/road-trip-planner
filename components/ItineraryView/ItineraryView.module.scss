@@ -1,26 +1,28 @@
+@use '@/app/variables' as v;
+
 .wrapper {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: linear-gradient(135deg, v.$color-bg-primary 0%, v.$color-bg-secondary 50%, v.$color-bg-tertiary 100%);
+  height: 100vh;
+  overflow-y: auto;
 }
 
 // --- Hero ---
 .hero {
-  background: rgba(0, 0, 0, 0.3);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 3rem 2rem;
+  background: v.$color-bg-primary;
+  padding: v.$space-xl v.$space-xl;
 }
 
 .heroInner {
-  max-width: 800px;
+  max-width: v.$max-width-lg;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: v.$space-md;
 }
 
 .eyebrow {
-  color: #e94560;
-  font-size: 0.8rem;
+  color: v.$color-accent;
+  font-size: v.$font-size-xs;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -28,8 +30,8 @@
 }
 
 .title {
-  color: #ffffff;
-  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  color: v.$color-text;
+  font-size: clamp(v.$font-size-lg, 4vw, v.$font-size-xl);
   font-weight: 700;
   margin: 0;
   line-height: 1.2;
@@ -39,26 +41,26 @@
 .stats {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: v.$space-lg;
   flex-wrap: wrap;
 }
 
 .stat {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: v.$space-xs;
 }
 
 .statValue {
-  color: #ffffff;
-  font-size: 1.3rem;
+  color: v.$color-text;
+  font-size: v.$font-size-md;
   font-weight: 700;
   line-height: 1;
 }
 
 .statLabel {
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 0.75rem;
+  color: v.$color-text-muted;
+  font-size: v.$font-size-xs;
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -66,24 +68,24 @@
 .divider {
   width: 1px;
   height: 2rem;
-  background: rgba(255, 255, 255, 0.15);
+  background: v.$color-border;
 }
 
 // --- Content ---
 .content {
-  max-width: 800px;
+  max-width: v.$max-width-lg;
   margin: 0 auto;
-  padding: 2.5rem 2rem;
+  padding: v.$space-xl 0;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: v.$space-2xl;
 }
 
 // --- Days ---
 .days {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: v.$space-xl;
 }
 
 // --- Footer ---
@@ -91,30 +93,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  padding: 2rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  gap: v.$space-md;
+  padding: v.$space-xl 0;
+  border-top: 1px solid v.$color-border-subtle;
 
   p {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.95rem;
+    color: v.$color-text-muted;
+    font-size: v.$font-size-sm;
     margin: 0;
   }
 }
 
 .resetButton {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.75rem;
-  color: #ffffff;
+  background: v.$color-accent;
+  border: none;
+  border-radius: v.$radius-md;
+  color: v.$color-text;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 0.75rem 2rem;
-  transition: background 0.2s, border-color 0.2s;
+  font-size: v.$font-size-sm;
+  font-weight: 600;
+  padding: v.$space-md v.$space-2xl;
+  transition: background 0.2s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.35);
+    background: v.$color-accent-muted;
   }
 }

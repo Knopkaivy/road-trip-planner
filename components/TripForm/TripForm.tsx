@@ -6,12 +6,12 @@ import { TripFormData } from "@/types/trip"
 import styles from './TripForm.module.scss'
 
 const VIBES = [
-    {value: 'scenic', label: '🏔️ Scenic & Nature'},
-    {value: 'foodie', label: '🍖 Foodie Adventure'},
-    {value: 'music', label: '🎵 Music & Culture'},
-    {value: 'history', label: '🏛️ History & Heritage'},
-    {value: 'adventure', label: '🧗 Off the Beaten Path'},
-    {value: 'relaxed', label: '😎 Slow & Relaxed'},
+    {value: 'scenic', label: 'Scenic & Nature'},
+    {value: 'foodie', label: 'Foodie Adventure'},
+    {value: 'music', label: 'Music & Culture'},
+    {value: 'history', label: 'History & Heritage'},
+    {value: 'adventure', label: 'Off the Beaten Path'},
+    {value: 'relaxed', label: 'Slow & Relaxed'},
 ]
 
 export default function TripForm(){
@@ -55,18 +55,18 @@ export default function TripForm(){
     return(
         <div className={styles.wrapper}>
             <div className={styles.card}>
-                <h1 className={styles.title}>🚗 Road Trip Planner</h1>
+                <h1 className={styles.title}>Road Trip Planner</h1>
                 <p className={styles.subtitle}>Tell us where you're headed and we'll plan the perfect route</p>
 
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <div className={styles.field}>
                         <label htmlFor="origin">Starting From</label>
-                        <input id="origin" name="origin" type="text" value={form.origin} onChange={handleChange} required />
+                        <input id="origin" name="origin" type="text" value={form.origin} onChange={handleChange} required placeholder="e.g. San Francisco, CA" />
                     </div>
 
                     <div className={styles.field}>
                         <label htmlFor="destination">Heading To</label>
-                        <input id="destination" name="destination" type="text" value={form.destination} onChange={handleChange} required />
+                        <input id="destination" name="destination" type="text" value={form.destination} onChange={handleChange} required  placeholder="e.g. Seattle, WA"  />
                     </div>
 
                     <div className={styles.field}>
@@ -82,7 +82,7 @@ export default function TripForm(){
                             ))}
                         </select>
                     </div>
-                    <button className={styles.button} type="submit" disabled={isLoading}>{isLoading ? 'Planning your trip...' : 'Plan My Trip 🗺️'}</button>
+                    <button className={styles.button} type="submit" disabled={isLoading}>{isLoading ? 'Planning your trip...' : 'Plan My Trip'}</button>
                 </form>
             </div>
         </div>

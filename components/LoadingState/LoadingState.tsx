@@ -14,20 +14,12 @@ export default function LoadingState(){
     return(
         <div className={styles.wrapper}>
             <div className={styles.card}>
-                <div className={styles.iconWrapper}>
-                    <span className={styles.car}>🚗</span>
-                    <div className={styles.road}>
-                        <div className={styles.line}></div>
-                        <div className={styles.line}></div>
-                        <div className={styles.line}></div>
-                    </div>
-                </div>
 
                 <h2 className={styles.title}>Planning your road trip</h2>
 
                 <div className={styles.messages}>
                     {MESSAGES.map((msg, index) => (
-                        <p className={styles.message} key={index} style={{animationDelay: `${index * 1.2}s`}}>{msg}</p>
+                        <p className={styles.message} key={index}>{msg}</p>
                     ))}
                 </div>
                 <div className={styles.dots}>

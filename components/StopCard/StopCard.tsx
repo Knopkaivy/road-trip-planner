@@ -2,13 +2,13 @@ import {Stop} from '@/types/trip'
 import styles from './StopCard.module.scss'
 
 const TYPE_ICONS: Record<string, string> = {
-  food:          '🍖',
-  attraction:    '🎯',
-  nature:        '🏔️',
+  food:          '🍽️',
+  attraction:    '🌉',
+  nature:        '🌳',
   music:         '🎵',
-  rest:          '☕',
+  rest:          '⏸️',
   fuel:          '⛽',
-  accommodation: '🏨',
+  accommodation: '🏕️',
 }
 
 interface StopCardProps {
@@ -31,7 +31,7 @@ export default function StopCard({stop}: StopCardProps){
             <p className={styles.description}>{stop.description}</p>
 
             <div className={styles.tip}>
-                <span className={styles.tipLabel}>💡 Insider tip</span>
+                <span className={styles.tipLabel}>Insider tip</span>
                 <p>{stop.tip}</p>
             </div>
         </div>

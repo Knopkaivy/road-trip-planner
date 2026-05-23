@@ -2,7 +2,6 @@
 
 import { useTripStore } from "@/store/useTripStore";
 import TripForm from "../components/TripForm/TripForm";
-import styles from "./page.module.scss"
 import LoadingState from "@/components/LoadingState/LoadingState";
 import ItineraryView from "@/components/ItineraryView/ItineraryView";
 
@@ -12,5 +11,5 @@ export default function Home() {
   if(isLoading) return <LoadingState/>
   if(itinerary) return <ItineraryView/>
   return <TripForm/>
-  
+
 }

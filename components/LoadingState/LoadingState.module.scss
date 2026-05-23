@@ -1,70 +1,27 @@
+@use '@/app/variables' as v;
+
 .wrapper {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  padding: v.$space-xl;
+  background: linear-gradient(135deg, v.$color-bg-primary 0%, v.$color-bg-secondary 50%, v.$color-bg-tertiary 100%);
 }
 
 .card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  max-width: 400px;
+  gap: v.$space-xl;
+  max-width: v.$max-width;
   text-align: center;
-}
-
-// --- Car animation ---
-.iconWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  width: 200px;
-}
-
-.car {
-  font-size: 2.5rem;
-  display: block;
-  animation: drive 2s ease-in-out infinite;
-}
-
-@keyframes drive {
-  0%, 100% { transform: translateX(-8px); }
-  50%       { transform: translateX(8px); }
-}
-
-// --- Road dashes ---
-.road {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.line {
-  height: 3px;
-  flex: 1;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 2px;
-  animation: flash 1.5s ease-in-out infinite;
-
-  &:nth-child(2) { animation-delay: 0.3s; }
-  &:nth-child(3) { animation-delay: 0.6s; }
-}
-
-@keyframes flash {
-  0%, 100% { opacity: 0.3; }
-  50%       { opacity: 1; }
 }
 
 // --- Title ---
 .title {
-  color: #ffffff;
-  font-size: 1.4rem;
+  color: v.$color-text;
+  font-size: v.$font-size-md;
   font-weight: 600;
 }
 
@@ -78,36 +35,35 @@
 .message {
   position: absolute;
   width: 100%;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.95rem;
+  color: v.$color-text-secondary;
+  font-size: v.$font-size-sm;
   opacity: 0;
-  animation: cycle 6s ease-in-out infinite;
+  animation: cycle 20s ease-in-out infinite;
 
   @for $i from 1 through 5 {
     &:nth-child(#{$i}) {
-      animation-delay: #{($i - 1) * 1.2}s;
+      animation-delay: #{($i - 1) * 4}s;
     }
   }
 }
 
 @keyframes cycle {
   0%   { opacity: 0; transform: translateY(6px); }
-  10%  { opacity: 1; transform: translateY(0); }
-  25%  { opacity: 1; transform: translateY(0); }
-  35%  { opacity: 0; transform: translateY(-6px); }
-  100% { opacity: 0; }
+  5%  { opacity: 1; transform: translateY(0); }
+  15%  { opacity: 1; transform: translateY(0); }
+  20%  { opacity: 0; transform: translateY(-6px); }
 }
 
 // --- Bouncing dots ---
 .dots {
   display: flex;
-  gap: 0.5rem;
+  gap: v.$space-sm;
 
   span {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #e94560;
+    background: v.$color-accent;
     display: block;
     animation: bounce 0.8s ease-in-out infinite;
   }

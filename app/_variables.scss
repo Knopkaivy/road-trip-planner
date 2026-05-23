@@ -1,0 +1,51 @@
+// Colors
+$color-bg-primary:    #1a1a2e;
+$color-bg-secondary:  #16213e;
+$color-bg-tertiary:   #0f3460;
+$color-accent:        #e94560;
+$color-accent-muted:  #c73652;
+
+// Text
+$color-text:          #ffffff;
+$color-text-primary:   rgba($color-text, 1);
+$color-text-secondary: rgba($color-text, .7);
+$color-text-muted:     rgba($color-text, .45);
+
+// Borders
+$color-border:         rgba($color-text, .1);
+$color-border-subtle:  rgba($color-text, .07);
+$color-border-accent:  rgba($color-accent, 0.2);
+
+// Surfaces
+$color-surface:        rgba($color-text, .03);
+$color-surface-hover:  rgba($color-text, .07);
+$color-surface-muted:  rgba($color-text, .4);
+$color-surface-muted-accent:  rgba($color-accent, 0.1);
+
+//Font
+$font-size-xs: .875rem;
+$font-size-sm: 1rem;
+$font-size-md: 1.4rem;
+$font-size-lg: 1.6rem;
+$font-size-xl: 2.5rem;
+
+// Spacing
+$space-xs:  .25rem;
+$space-sm:  .5rem;
+$space-md:  1rem;
+$space-lg:  1.5rem;
+$space-xl:  2rem;
+$space-2xl: 3rem;
+$max-width: 30rem;
+$max-width-lg: 50rem;
+
+// Border radius
+$radius-xs: .075rem;
+$radius-sm: .125rem;
+$radius-md: .25rem;
+$radius-lg: .375rem;
+$radius-xl: .5rem;
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-base: 0.3s ease;

@@ -44,8 +44,8 @@ export default function ItineraryView(){
                 </div>
 
                 <div className={styles.footer}>
-                    <p>Want to go somewhere else?</p>
-                    <button className={styles.resetButton} onClick={reset}>Plan Another Trip 🚗</button>
+                    <p>Got more ideas?</p>
+                    <button className={styles.resetButton} onClick={reset}>Plan Another Trip</button>
                 </div>
             </div>
         </div>
