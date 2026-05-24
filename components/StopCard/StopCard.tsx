@@ -1,16 +1,26 @@
 'use client'
 import { useState } from 'react'
 import {Stop} from '@/types/trip'
+import {
+  FoodIcon,
+  AttractionIcon,
+  NatureIcon,
+  MusicIcon,
+  RestIcon,
+  FuelIcon,
+  AccommodationIcon
+} from '@/components/icons/StopIcons'
+import { ChevronIcon } from '../icons/UIIcons'
 import styles from './StopCard.module.scss'
 
-const TYPE_ICONS: Record<string, string> = {
-  food:          '🍽️',
-  attraction:    '🌉',
-  nature:        '🌳',
-  music:         '🎵',
-  rest:          '⏸️',
-  fuel:          '⛽',
-  accommodation: '🏕️',
+const TYPE_ICONS: Record<string, JSX.Element> = {
+  food:          <FoodIcon />,
+  attraction:    <AttractionIcon />,
+  nature:        <NatureIcon />,
+  music:         <MusicIcon />,
+  rest:          <RestIcon />,
+  fuel:          <FuelIcon />,
+  accommodation: <AccommodationIcon />,
 }
 
 interface StopCardProps {
@@ -18,20 +28,7 @@ interface StopCardProps {
     id: number,
 }
 
-const ChevronIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <polyline points="6 9 12 15 18 9" />
-  </svg>
-)
+
 
 export default function StopCard({stop, id}: StopCardProps){
     const [isExpanded, setIsExpanded] = useState<boolean>(id === 0 ? true : false)
@@ -44,7 +41,7 @@ export default function StopCard({stop, id}: StopCardProps){
         <div className={styles.card}>
             <div className={styles.header} onClick={toggleCollapsible} aria-expanded={isExpanded} >
                 <span className={styles.icon}>
-                    {TYPE_ICONS[stop.type] ?? '📍'}
+                    {TYPE_ICONS[stop.type] ?? <AttractionIcon />}
                 </span>
                 <div className={styles.meta}>
                     <h4 className={styles.name}>{stop.name}</h4>

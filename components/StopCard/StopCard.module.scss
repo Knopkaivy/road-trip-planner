@@ -26,6 +26,10 @@
   line-height: 1;
   flex-shrink: 0;
   margin-top: 0.1rem;
+
+  svg{
+    stroke: var(--color-accent);
+  }
 }
 
 .meta {
