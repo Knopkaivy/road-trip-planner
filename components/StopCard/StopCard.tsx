@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {Stop} from '@/types/trip'
 import {
   FoodIcon,
@@ -13,7 +13,7 @@ import {
 import { ChevronIcon } from '../icons/UIIcons'
 import styles from './StopCard.module.scss'
 
-const TYPE_ICONS: Record<string, JSX.Element> = {
+const TYPE_ICONS: Record<string, React.ReactElement> = {
   food:          <FoodIcon />,
   attraction:    <AttractionIcon />,
   nature:        <NatureIcon />,
