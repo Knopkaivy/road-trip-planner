@@ -29,7 +29,7 @@ export default function DayCard({day}: DayCardProps){
 
             <div className={styles.stops}>
                 {day.stops.map((stop, index) =>(
-                    <StopCard key={index} stop={stop} />
+                    <StopCard key={index} id={index} stop={stop} />
                 ))}
             </div>
 

@@ -4,10 +4,9 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border-subtle);
   border-radius: v.$radius-md;
-  padding: v.$space-lg;
+  padding: v.$space-md;
   display: flex;
   flex-direction: column;
-  gap: v.$space-md;
   transition: background 0.2s, border-color 0.2s;
 
   &:hover {
@@ -18,7 +17,7 @@
 
 .header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: v.$space-md;
 }
 
@@ -49,11 +48,44 @@
   font-size: v.$font-size-xs;
 }
 
+.chevron {
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.details{
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+  
+  & > * {
+    overflow: hidden;
+  }
+  
+  &.expanded{
+    grid-template-rows: 1fr;
+  }
+}
+
+.inner{
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-md;
+}
+
 .description {
   color: var(--color-text-secondary);
   font-size: v.$font-size-xs;
   line-height: 1.6;
   margin: 0;
+  padding-top: v.$space-md;
 }
 
 .tip {
