@@ -110,15 +110,15 @@ reset()     → clears all state, returns to TripForm
 - [x] Step 3 — `app/api/itinerary/route.ts` — Claude API connection
 - [x] Step 4 — `TripForm` component — User input UI
 - [x] Step 5 — `app/page.tsx` — Wire everything together
-- [ ] Step 6 — `LoadingState` component
-- [ ] Step 7 — `DayCard` + `StopCard` components
-- [ ] Step 8 — `ItineraryView` component
-- [ ] Step 9 — Final polish + deploy to Vercel
+- [x] Step 6 — `LoadingState` component
+- [x] Step 7 — `DayCard` + `StopCard` components
+- [x] Step 8 — `ItineraryView` component
+- [x] Step 9 — Final polish + deploy to Vercel
 
 ---
 
 ## Phase 2 (Post-MVP)
-- 🗺️ Map integration (Mapbox or Google Maps)
+- 🗺️ Map integration (Mapbox)
 - 🌤️ Weather per stop
 - 💾 Save / share itinerary
 - ⚡ Streaming responses for faster perceived load time

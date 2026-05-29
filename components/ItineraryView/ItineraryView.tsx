@@ -1,11 +1,49 @@
 'use client'
 
+import { useState, useRef, useEffect } from 'react'
 import { useTripStore } from '@/store/useTripStore'
+import Map from '../Map/Map'
 import DayCard from '../DayCard/DayCard'
+import { ChevronIcon } from '../icons/UIIcons'
 import styles from './ItineraryView.module.scss'
 
 export default function ItineraryView(){
+    const MOBILE_MAX_WIDTH = 480
     const {itinerary, reset} = useTripStore()
+    const [isExpanded, setIsExpanded] = useState<boolean>(true)
+    const contentRightRef = useRef<HTMLDivElement | null >(null)
+    const headingRef = useRef<HTMLDivElement | null >(null)
+
+    useEffect(() => {
+        updateHeight(true)
+    }, [])
+
+    useEffect(()=>{
+        const handleResize = () =>{
+            if(!contentRightRef.current) return
+            contentRightRef.current.style.height = ''
+            setIsExpanded(true)
+        }
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    const toggleCollapsible = () =>{
+        const newState = !isExpanded
+        setIsExpanded(newState)
+        updateHeight(newState)
+    }
+
+    const updateHeight = (expanded: boolean) =>{
+        if(!contentRightRef.current || !headingRef.current) return
+        if(window.innerWidth > MOBILE_MAX_WIDTH) return
+        const headingHeight = headingRef.current.getBoundingClientRect().height
+        if(expanded){
+            contentRightRef.current.style.height = `${headingHeight + 300}px`
+        } else {
+            contentRightRef.current.style.height = `${headingHeight}px`
+        }
+    }
 
     if(!itinerary) return null
 
@@ -37,16 +75,27 @@ export default function ItineraryView(){
             </div>
 
             <div className={styles.content}>
-                <div className={styles.days}>
-                    {itinerary.days.map((day, index)=>(
-                        <DayCard key={index} day={day}/>
-                    ))}
+                <div className={styles.contentLeft}>
+                    <div className={styles.days}>
+                        {itinerary.days.map((day, index)=>(
+                            <DayCard key={index} day={day}/>
+                        ))}
+                    </div>
                 </div>
 
-                <div className={styles.footer}>
-                    <p>Got more ideas?</p>
-                    <button className={styles.resetButton} onClick={reset}>Plan Another Trip</button>
+                <div ref={contentRightRef} className={styles.contentRight}>
+                    <div ref={headingRef} className={styles.collapsibleMobileHeading} onClick={toggleCollapsible} aria-expanded={isExpanded}>
+                        <span>{`${ isExpanded ? 'Hide' : 'Show'} Map`}</span>
+                        <div className={`${styles.chevron} ${isExpanded ? styles.chevronOpen : ''}`}><ChevronIcon/></div>
+                    </div>
+                    <div className={`${styles.collapsibleMobile} ${isExpanded ? styles.expanded : ''}`} aria-hidden={!isExpanded}>
+                        <Map/>
+                    </div>
                 </div>
+            </div>
+
+            <div className={styles.footer}>
+                <button className={styles.resetButton} onClick={reset}>Plan Another Trip</button>
             </div>
         </div>
     )
