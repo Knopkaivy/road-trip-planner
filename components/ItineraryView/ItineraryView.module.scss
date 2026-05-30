@@ -94,6 +94,8 @@
   margin: 0 auto;
   overflow: auto;
   padding: v.$space-xl v.$space-md;
+  scrollbar-color: var(--color-accent-muted) var(--color-surface) ;
+  scrollbar-width: thin;
 }
 
 .contentRight {

@@ -64,7 +64,9 @@ function buildPrompt(origin: string, destination: string, days: number, vibe: st
 
         {
         "origin": "${origin}",
+        "originCoordinates": [<origin longitude as number>, < origin latitude as number>],
         "destination": "${destination}",
+        "destinationCoordinates": [<destination longitude as number>, < destination latitude as number>],
         "totalDays": ${days},
         "totalMiles": <estimated total miles as number>,
         "vibe": "${vibe}",
@@ -81,7 +83,8 @@ function buildPrompt(origin: string, destination: string, days: number, vibe: st
                 "type": "<food|attraction|nature|music|rest|fuel|accommodation>",
                 "description": "<1-2 sentence description>",
                 "tip": "<one insider tip>",
-                "duration": "<suggested time eg 1 hour>"
+                "duration": "<suggested time eg 1 hour>",
+                "stopCoordinates": [<longitude as number>, <latitude as number>]
                 }
             ],
             "overnight": "<where they sleep tonight>"

@@ -12,7 +12,8 @@ export interface Stop {
   type: StopType
   description: string
   tip: string
-  duration: string
+  duration: string,
+  stopCoordinates: [number, number]
 }
 
 export interface Day {
@@ -26,8 +27,10 @@ export interface Day {
 }
 
 export interface Itinerary {
-  origin: string
+  origin: string,
+  originCoordinates: [number, number],
   destination: string
+  destinationCoordinates: [number, number],
   totalDays: number
   totalMiles: number
   vibe: string
