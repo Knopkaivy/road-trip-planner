@@ -13,6 +13,11 @@
     background: var(--color-surface-hover);
     border-color: var(--color-border);
   }
+
+  &.active{
+    border-color: var(--color-accent);
+    background: var(--color-accent-subtle);
+  }
 }
 
 .header {
@@ -116,6 +121,7 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+
 
 @media (max-width: v.$bp-sm){
   .card{

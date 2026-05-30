@@ -12,10 +12,10 @@ const DEFAULT_MAP_CENTER: [number, number] = [-98.5795, 39.8283]
 
 export default function Map(){
 
-    const {itinerary} = useTripStore()
+    const {itinerary, activeStopIndex, setActiveStopIndex} = useTripStore()
     const mapRef = useRef<mapboxgl.Map | null>(null)
     const mapContainerRef = useRef<HTMLDivElement | null>(null)
-
+    const markerRefs = useRef<{el: HTMLElement, index: number}[]>([])
     
     const getMapCenter = (): [number, number] =>{
         if(!itinerary) return DEFAULT_MAP_CENTER
@@ -46,6 +46,7 @@ export default function Map(){
 
             const bounds = new mapboxgl.LngLatBounds()
             const markerEls: { el: HTMLElement, index: number }[] = []
+            markerRefs.current = markerEls
 
             const originEl = createMarker('#22c55e', 'lg')
             addMarker(mapRef.current, itinerary.originCoordinates, originEl, itinerary.origin, bounds, markerEls, 0)
@@ -53,8 +54,12 @@ export default function Map(){
             let i = 1
             for (const day of itinerary.days) {
                 for (const stop of day.stops) {
+                    const index = i
                     const stopEl = createMarker('#ffffff', 'sm')
-                    addMarker(mapRef.current, stop.stopCoordinates, stopEl, stop.name, bounds, markerEls, i)
+                    addMarker(mapRef.current, stop.stopCoordinates, stopEl, stop.name, bounds, markerEls, index)
+                    stopEl.addEventListener('click', () =>{
+                        setActiveStopIndex(index)
+                    })
                     i++
                 }
             }
@@ -100,6 +105,16 @@ export default function Map(){
             mapRef.current?.remove()
         }
     },[])
+
+    useEffect(()=>{
+        markerRefs.current.forEach(({el, index})=>{
+            const isActive = index === activeStopIndex
+            el.style.width = isActive ? '18px' : '10px'
+            el.style.height = isActive ? '18px' : '10px'
+            el.style.background = isActive ? '#e94560' : '#ffffff'
+            el.style.zIndex = isActive ? '10' : '1'
+        })
+    }, [activeStopIndex])
 
     return (
         <>

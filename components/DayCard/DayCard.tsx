@@ -3,10 +3,11 @@ import StopCard from '../StopCard/StopCard'
 import styles from './DayCard.module.scss'
 
 interface DayCardProps {
-    day: Day
+    day: Day,
+    startStopIndex: number
 }
 
-export default function DayCard({day}: DayCardProps){
+export default function DayCard({day, startStopIndex}: DayCardProps){
     return (
         <div className={styles.card}>
             <div className={styles.header}>
@@ -29,7 +30,7 @@ export default function DayCard({day}: DayCardProps){
 
             <div className={styles.stops}>
                 {day.stops.map((stop, index) =>(
-                    <StopCard key={index} id={index} stop={stop} />
+                    <StopCard key={index} id={index} stop={stop} stopIndex={startStopIndex + index} />
                 ))}
             </div>
 

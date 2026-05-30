@@ -77,9 +77,16 @@ export default function ItineraryView(){
             <div className={styles.content}>
                 <div className={styles.contentLeft}>
                     <div className={styles.days}>
-                        {itinerary.days.map((day, index)=>(
-                            <DayCard key={index} day={day}/>
-                        ))}
+                        {(()=>{
+                            let stopIndex = 0
+                            return itinerary.days.map((day, dayIndex)=>{
+                                const startIndex = stopIndex
+                                stopIndex += day.stops.length
+                                return (
+                                    <DayCard key={dayIndex} day={day} startStopIndex={startIndex}/>
+                                )
+                            })
+                        })()}
                     </div>
                 </div>
 

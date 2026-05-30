@@ -1,5 +1,7 @@
 'use client'
-import React, { useState } from 'react'
+
+import React, { useEffect, useState } from 'react'
+import {useTripStore} from '@/store/useTripStore'
 import {Stop} from '@/types/trip'
 import {
   FoodIcon,
@@ -26,19 +28,28 @@ const TYPE_ICONS: Record<string, React.ReactElement> = {
 interface StopCardProps {
     stop: Stop,
     id: number,
+    stopIndex: number
 }
 
 
 
-export default function StopCard({stop, id}: StopCardProps){
+export default function StopCard({stop, id, stopIndex}: StopCardProps){
     const [isExpanded, setIsExpanded] = useState<boolean>(id === 0 ? true : false)
+    const { activeStopIndex, setActiveStopIndex } = useTripStore()
+
+    useEffect(()=>{
+        if(activeStopIndex === stopIndex){
+            setIsExpanded(true)
+        }
+    }, [activeStopIndex])
 
     const toggleCollapsible = () =>{
         setIsExpanded(!isExpanded)
+        if(activeStopIndex !== stopIndex) setActiveStopIndex(stopIndex)
     }
 
     return(
-        <div className={styles.card}>
+        <div className={`${styles.card} ${activeStopIndex === stopIndex ? styles.active : ''}`}>
             <div className={styles.header} onClick={toggleCollapsible} aria-expanded={isExpanded} >
                 <span className={styles.icon}>
                     {TYPE_ICONS[stop.type] ?? <AttractionIcon />}
