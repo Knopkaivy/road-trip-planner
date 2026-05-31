@@ -9,13 +9,15 @@ export const addMarker = (
     bounds: mapboxgl.LngLatBounds,
     markerEls: {el: HTMLElement, index: number}[],
     index: number
-) =>{
+): mapboxgl.Popup =>{
+  const popup = new mapboxgl.Popup().setText(label)
     new mapboxgl.Marker({element: el})
     .setLngLat(coordinates)
-    .setPopup(new mapboxgl.Popup().setText(label))
+    .setPopup(popup)
     .addTo(map)
     bounds.extend(coordinates)
     markerEls.push({el, index})
+    return popup
 }
 
 export const buildRouteCoordinates = (itinerary: Itinerary): [number, number][] =>[

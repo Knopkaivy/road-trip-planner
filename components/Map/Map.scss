@@ -1,0 +1,13 @@
+@use '@/app/variables' as v;
+
+.mapboxgl-popup {
+  z-index: 9999 !important;
+
+  &-content{
+    padding: v.$space-md;
+  }
+
+  &-close-button{
+    padding: v.$space-xs;
+  }
+}

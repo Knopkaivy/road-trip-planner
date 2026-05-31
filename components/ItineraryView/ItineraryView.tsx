@@ -11,6 +11,7 @@ export default function ItineraryView(){
     const MOBILE_MAX_WIDTH = 480
     const {itinerary, reset} = useTripStore()
     const [isExpanded, setIsExpanded] = useState<boolean>(true)
+    const contentLeftRef = useRef<HTMLDivElement | null>(null)
     const contentRightRef = useRef<HTMLDivElement | null >(null)
     const headingRef = useRef<HTMLDivElement | null >(null)
 
@@ -75,15 +76,15 @@ export default function ItineraryView(){
             </div>
 
             <div className={styles.content}>
-                <div className={styles.contentLeft}>
+                <div ref={contentLeftRef} className={styles.contentLeft}>
                     <div className={styles.days}>
                         {(()=>{
-                            let stopIndex = 0
+                            let stopIndex = 1
                             return itinerary.days.map((day, dayIndex)=>{
                                 const startIndex = stopIndex
                                 stopIndex += day.stops.length
                                 return (
-                                    <DayCard key={dayIndex} day={day} startStopIndex={startIndex}/>
+                                    <DayCard key={dayIndex} day={day} startStopIndex={startIndex} scrollContainerRef={contentLeftRef}/>
                                 )
                             })
                         })()}

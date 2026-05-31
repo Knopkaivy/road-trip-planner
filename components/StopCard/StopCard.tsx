@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {useTripStore} from '@/store/useTripStore'
 import {Stop} from '@/types/trip'
 import {
@@ -28,17 +28,32 @@ const TYPE_ICONS: Record<string, React.ReactElement> = {
 interface StopCardProps {
     stop: Stop,
     id: number,
-    stopIndex: number
+    stopIndex: number,
+    scrollContainerRef: React.RefObject<HTMLDivElement | null>
 }
 
 
 
-export default function StopCard({stop, id, stopIndex}: StopCardProps){
+export default function StopCard({stop, id, stopIndex, scrollContainerRef}: StopCardProps){
     const [isExpanded, setIsExpanded] = useState<boolean>(id === 0 ? true : false)
     const { activeStopIndex, setActiveStopIndex } = useTripStore()
+    const cardRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(()=>{
-        if(activeStopIndex === stopIndex){
+        if(activeStopIndex === stopIndex && cardRef.current && scrollContainerRef?.current){
+            
+            const container = scrollContainerRef.current
+            const card = cardRef.current
+            
+            const containerTop = container.getBoundingClientRect().top
+            const cardTop = card.getBoundingClientRect().top
+            const offset = cardTop - containerTop + container.scrollTop
+            
+            container.scrollTo({
+                top: offset,
+                behavior: 'smooth'
+            })
+            
             setIsExpanded(true)
         }
     }, [activeStopIndex])
@@ -49,7 +64,7 @@ export default function StopCard({stop, id, stopIndex}: StopCardProps){
     }
 
     return(
-        <div className={`${styles.card} ${activeStopIndex === stopIndex ? styles.active : ''}`}>
+        <div ref={cardRef} className={`${styles.card} ${activeStopIndex === stopIndex ? styles.active : ''}`}>
             <div className={styles.header} onClick={toggleCollapsible} aria-expanded={isExpanded} >
                 <span className={styles.icon}>
                     {TYPE_ICONS[stop.type] ?? <AttractionIcon />}

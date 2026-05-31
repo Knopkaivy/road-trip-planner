@@ -5,6 +5,7 @@ import mapboxgl from 'mapbox-gl'
 import { useTripStore } from '@/store/useTripStore'
 import { addMarker, buildRouteCoordinates, createMarker } from '@/lib/mapUtils'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import './Map.scss'
 import styles from './Map.module.scss'
 
 
@@ -14,6 +15,7 @@ export default function Map(){
 
     const {itinerary, activeStopIndex, setActiveStopIndex} = useTripStore()
     const mapRef = useRef<mapboxgl.Map | null>(null)
+    const popupRefs = useRef<mapboxgl.Popup[]>([])
     const mapContainerRef = useRef<HTMLDivElement | null>(null)
     const markerRefs = useRef<{el: HTMLElement, index: number}[]>([])
     
@@ -49,14 +51,16 @@ export default function Map(){
             markerRefs.current = markerEls
 
             const originEl = createMarker('#22c55e', 'lg')
-            addMarker(mapRef.current, itinerary.originCoordinates, originEl, itinerary.origin, bounds, markerEls, 0)
+            const originPopup = addMarker(mapRef.current, itinerary.originCoordinates, originEl, itinerary.origin, bounds, markerEls, 0)
+            popupRefs.current.push(originPopup)
 
             let i = 1
             for (const day of itinerary.days) {
                 for (const stop of day.stops) {
                     const index = i
                     const stopEl = createMarker('#ffffff', 'sm')
-                    addMarker(mapRef.current, stop.stopCoordinates, stopEl, stop.name, bounds, markerEls, index)
+                    const stopPopup = addMarker(mapRef.current, stop.stopCoordinates, stopEl, stop.name, bounds, markerEls, index)
+                    popupRefs.current.push(stopPopup)
                     stopEl.addEventListener('click', () =>{
                         setActiveStopIndex(index)
                     })
@@ -65,7 +69,8 @@ export default function Map(){
             }
 
             const destEl = createMarker('#e94560', 'lg')
-            addMarker(mapRef.current, itinerary.destinationCoordinates, destEl, itinerary.destination, bounds, markerEls, i)
+            const destPopup = addMarker(mapRef.current, itinerary.destinationCoordinates, destEl, itinerary.destination, bounds, markerEls, i)
+            popupRefs.current.push(destPopup)
 
             bounds.extend(itinerary.destinationCoordinates)
 
@@ -106,14 +111,46 @@ export default function Map(){
         }
     },[])
 
-    useEffect(()=>{
-        markerRefs.current.forEach(({el, index})=>{
+    const flyToStop = (stopIndex: number) =>{
+        if (!mapRef.current || !itinerary) return
+        const allStops = itinerary.days.flatMap(day => day.stops)
+        const activeStop = allStops[stopIndex]
+
+        if(activeStop){
+            mapRef.current.flyTo({
+                center: activeStop.stopCoordinates,
+                duration: 1000
+            })
+        }
+    }
+
+    const updateActiveMarker = () =>{
+            markerRefs.current.forEach(({el, index})=>{
             const isActive = index === activeStopIndex
             el.style.width = isActive ? '18px' : '10px'
             el.style.height = isActive ? '18px' : '10px'
             el.style.background = isActive ? '#e94560' : '#ffffff'
             el.style.zIndex = isActive ? '10' : '1'
         })
+    }
+
+    const updateActivePopup = (stopIndex: number) =>{
+        if (!mapRef.current) return
+
+        popupRefs.current.forEach(popup => popup.remove())
+
+        const activePopup = popupRefs.current[stopIndex]
+        if(activePopup) activePopup.addTo(mapRef.current)
+    }
+
+    useEffect(()=>{
+
+        if (activeStopIndex === null || !mapRef.current || !itinerary) return
+
+        updateActiveMarker()
+        updateActivePopup(activeStopIndex)
+        flyToStop(activeStopIndex - 1)
+
     }, [activeStopIndex])
 
     return (

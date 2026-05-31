@@ -4,10 +4,11 @@ import styles from './DayCard.module.scss'
 
 interface DayCardProps {
     day: Day,
-    startStopIndex: number
+    startStopIndex: number,
+    scrollContainerRef: React.RefObject<HTMLDivElement | null>
 }
 
-export default function DayCard({day, startStopIndex}: DayCardProps){
+export default function DayCard({day, startStopIndex, scrollContainerRef}: DayCardProps){
     return (
         <div className={styles.card}>
             <div className={styles.header}>
@@ -30,7 +31,7 @@ export default function DayCard({day, startStopIndex}: DayCardProps){
 
             <div className={styles.stops}>
                 {day.stops.map((stop, index) =>(
-                    <StopCard key={index} id={index} stop={stop} stopIndex={startStopIndex + index} />
+                    <StopCard key={index} id={index} stop={stop} stopIndex={startStopIndex + index} scrollContainerRef={scrollContainerRef} />
                 ))}
             </div>
 
