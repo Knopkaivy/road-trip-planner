@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { useTripStore } from '@/store/useTripStore'
-import { addMarker, buildRouteCoordinates, createMarker } from '@/lib/mapUtils'
+import { addMarker, createMarker, generateRouteLayer } from '@/lib/mapUtils'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './Map.scss'
 import styles from './Map.module.scss'
@@ -11,9 +11,20 @@ import styles from './Map.module.scss'
 
 const DEFAULT_MAP_CENTER: [number, number] = [-98.5795, 39.8283]
 
+const MAP_STYLES = {
+  light: 'mapbox://styles/mapbox/streets-v12',
+  dark:  'mapbox://styles/mapbox/outdoors-v12'
+}
+
+const COLORS = {
+    primary: '#e94560',
+    origin: '#22c55e',
+    stop: '#ffffff'
+}
+
 export default function Map(){
 
-    const {itinerary, activeStopIndex, setActiveStopIndex} = useTripStore()
+    const {itinerary, activeStopIndex, setActiveStopIndex, theme} = useTripStore()
     const mapRef = useRef<mapboxgl.Map | null>(null)
     const popupRefs = useRef<mapboxgl.Popup[]>([])
     const mapContainerRef = useRef<HTMLDivElement | null>(null)
@@ -26,7 +37,6 @@ export default function Map(){
                 (itinerary.originCoordinates[1] + itinerary.destinationCoordinates[1]) / 2]
     }
 
-
     useEffect(()=>{
         if(!mapContainerRef.current) return
 
@@ -37,7 +47,7 @@ export default function Map(){
 
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current,
-            style: 'mapbox://styles/mapbox/streets-v12',
+            style: MAP_STYLES[theme],
             center: getMapCenter(),
             zoom: 5
         })
@@ -50,7 +60,7 @@ export default function Map(){
             const markerEls: { el: HTMLElement, index: number }[] = []
             markerRefs.current = markerEls
 
-            const originEl = createMarker('#22c55e', 'lg')
+            const originEl = createMarker(COLORS.origin, 'lg')
             const originPopup = addMarker(mapRef.current, itinerary.originCoordinates, originEl, itinerary.origin, bounds, markerEls, 0)
             popupRefs.current.push(originPopup)
 
@@ -58,7 +68,7 @@ export default function Map(){
             for (const day of itinerary.days) {
                 for (const stop of day.stops) {
                     const index = i
-                    const stopEl = createMarker('#ffffff', 'sm')
+                    const stopEl = createMarker(COLORS.stop, 'sm')
                     const stopPopup = addMarker(mapRef.current, stop.stopCoordinates, stopEl, stop.name, bounds, markerEls, index)
                     popupRefs.current.push(stopPopup)
                     stopEl.addEventListener('click', () =>{
@@ -68,7 +78,7 @@ export default function Map(){
                 }
             }
 
-            const destEl = createMarker('#e94560', 'lg')
+            const destEl = createMarker(COLORS.primary, 'lg')
             const destPopup = addMarker(mapRef.current, itinerary.destinationCoordinates, destEl, itinerary.destination, bounds, markerEls, i)
             popupRefs.current.push(destPopup)
 
@@ -79,31 +89,7 @@ export default function Map(){
                 maxZoom: 12
             })
 
-            mapRef.current.addSource('route', {
-                type: 'geojson',
-                data: {
-                    type: 'Feature',
-                    properties: {},
-                    geometry: {
-                        type: 'LineString',
-                        coordinates: buildRouteCoordinates(itinerary)
-                    }
-                }
-            })
-
-            mapRef.current.addLayer({
-                id: 'route',
-                type: 'line',
-                source: 'route',
-                layout: {
-                    'line-join': 'round',
-                    'line-cap': 'round'
-                },
-                paint: {
-                    'line-color': '#e94560',
-                    'line-width': 3,
-                }
-            })
+            generateRouteLayer(mapRef.current, itinerary, COLORS.primary)
         })
         
         return () => {
@@ -129,7 +115,7 @@ export default function Map(){
             const isActive = index === activeStopIndex
             el.style.width = isActive ? '18px' : '10px'
             el.style.height = isActive ? '18px' : '10px'
-            el.style.background = isActive ? '#e94560' : '#ffffff'
+            el.style.background = isActive ? COLORS.primary : COLORS.stop
             el.style.zIndex = isActive ? '10' : '1'
         })
     }
@@ -152,6 +138,17 @@ export default function Map(){
         flyToStop(activeStopIndex - 1)
 
     }, [activeStopIndex])
+
+    useEffect(()=>{
+        if(!mapRef.current) return
+        mapRef.current.setStyle(MAP_STYLES[theme])
+
+        // Re-add route after style reloads
+        mapRef.current.once('style.load', () =>{
+            if(!mapRef.current || !itinerary) return
+            generateRouteLayer(mapRef.current, itinerary, COLORS.primary)
+        })
+    }, [theme])
 
     return (
         <>

@@ -20,7 +20,7 @@ export const addMarker = (
     return popup
 }
 
-export const buildRouteCoordinates = (itinerary: Itinerary): [number, number][] =>[
+const buildRouteCoordinates = (itinerary: Itinerary): [number, number][] =>[
     itinerary?.originCoordinates, 
     ...itinerary?.days.flatMap(day => day.stops.map(stop => stop.stopCoordinates)),
     itinerary?.destinationCoordinates
@@ -39,4 +39,33 @@ export const createMarker = (color: string, size: 'sm' | 'lg' = 'sm') => {
     cursor: pointer;
   `
   return el
+}
+
+export const generateRouteLayer = (map: mapboxgl.Map ,itinerary: Itinerary, color: string) =>{
+
+  map.addSource('route', {
+      type: 'geojson',
+      data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+              type: 'LineString',
+              coordinates: buildRouteCoordinates(itinerary)
+          }
+      }
+  })
+
+  map.addLayer({
+      id: 'route',
+      type: 'line',
+      source: 'route',
+      layout: {
+          'line-join': 'round',
+          'line-cap': 'round'
+      },
+      paint: {
+          'line-color': color,
+          'line-width': 3,
+      }
+  })
 }

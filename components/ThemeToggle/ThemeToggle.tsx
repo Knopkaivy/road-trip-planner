@@ -1,13 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useTripStore } from '@/store/useTripStore'
 import { SunIcon, MoonIcon } from '../icons/UIIcons'
 import styles from './ThemeToggle.module.scss'
 
 type Theme = 'light' | 'dark'
 
 export default function ThemeToggle(){
-    const [theme, setTheme] = useState<Theme>('light');
+    const {theme, setTheme} = useTripStore()
 
     useEffect(()=>{
         const storedTheme = localStorage.getItem('theme') as Theme | null
