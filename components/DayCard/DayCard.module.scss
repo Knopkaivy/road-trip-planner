@@ -98,18 +98,39 @@
   }
 }
 
-@media (max-width: v.$bp-sm){
-  .card{
-    border-radius: 0;
+@media (max-width: v.$bp-lg){
+  .card {
     padding: v.$space-md;
+    gap: v.$space-md;
+  }
+
+  .title {
+    font-size: v.$font-size-md;
+  }
+}
+
+@media (max-width: v.$bp-md){
+  .card{
+    padding: v.$space-md v.$space-sm;
+    gap: v.$space-sm;
   }
 
   .dayBadge {
     padding: v.$space-sm;
   }
-
+  
   .title {
-    font-size: v.$font-size-md;
+    font-size: v.$font-size-sm;
+  }
+
+  .stops{
+    gap: v.$space-sm;
+  }
+}
+
+@media (max-width: v.$bp-sm){
+  .card{
+    border-radius: 0;
   }
 
 }

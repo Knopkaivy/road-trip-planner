@@ -2,8 +2,8 @@
 
 .toggleBtn{
   position: fixed;
-  top: 1.25rem;
-  right: 1.25rem;
+  top: v.$space-lg;
+  right: v.$space-lg;
   z-index: 100;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -26,5 +26,12 @@
 
   &:active {
     transform: scale(0.95);
+  }
+}
+
+@media (max-width: v.$bp-md){
+  .toggleBtn{
+    top: v.$space-md;
+    right: v.$space-md;
   }
 }

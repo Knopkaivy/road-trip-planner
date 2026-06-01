@@ -43,29 +43,32 @@ export const createMarker = (color: string, size: 'sm' | 'lg' = 'sm') => {
 
 export const generateRouteLayer = (map: mapboxgl.Map ,itinerary: Itinerary, color: string) =>{
 
-  map.addSource('route', {
-      type: 'geojson',
-      data: {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-              type: 'LineString',
-              coordinates: buildRouteCoordinates(itinerary)
-          }
-      }
-  })
+    if (map.getLayer('route')) map.removeLayer('route')
+    if (map.getSource('route')) map.removeSource('route')
 
-  map.addLayer({
-      id: 'route',
-      type: 'line',
-      source: 'route',
-      layout: {
-          'line-join': 'round',
-          'line-cap': 'round'
-      },
-      paint: {
-          'line-color': color,
-          'line-width': 3,
-      }
-  })
+    map.addSource('route', {
+        type: 'geojson',
+        data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+                type: 'LineString',
+                coordinates: buildRouteCoordinates(itinerary)
+            }
+        }
+    })
+
+    map.addLayer({
+        id: 'route',
+        type: 'line',
+        source: 'route',
+        layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        paint: {
+            'line-color': color,
+            'line-width': 3,
+        }
+    })
 }

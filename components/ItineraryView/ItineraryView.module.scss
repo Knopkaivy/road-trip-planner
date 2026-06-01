@@ -129,15 +129,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: v.$space-md;
   padding: v.$space-xl 0;
   border-top: 1px solid var(--color-border-subtle);
-
-  p {
-    color: var(--color-text-muted);
-    font-size: v.$font-size-sm;
-    margin: 0;
-  }
 }
 
 .resetButton {
@@ -153,6 +146,45 @@
 
   &:hover {
     background: var(--color-accent-muted);
+  }
+}
+
+@media (max-width: v.$bp-xl){
+  .contentLeft {
+    max-width: 50vw;
+  }
+}
+
+@media (max-width: v.$bp-lg){
+  .hero {
+    padding: v.$space-md;
+  }
+
+  .content {
+    height: calc(100vh - 6.1875rem);
+    padding-top: 9rem;
+  }
+
+  .contentRight {
+    height: calc(100vh - 6.1875rem - 9rem);
+  }
+
+  .days {
+    gap: v.$space-lg;
+  }
+
+  .footer {
+    padding: v.$space-lg 0;
+  }
+}
+
+@media (max-width: v.$bp-md){
+  .contentLeft{
+    padding: v.$space-sm;
+  }
+
+  .days {
+    gap: v.$space-md;
   }
 }
 
@@ -176,14 +208,8 @@
   }
 
   .contentLeft {
-    display: flex;
-    height: 100%;
-    flex: 1 1 auto;
-    flex-direction: column;
-    gap: v.$space-2xl;
     max-width: v.$max-width-lg;
     margin: -1px 0;
-    overflow: auto;
     padding: 0;
   }
 

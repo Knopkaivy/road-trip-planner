@@ -23,7 +23,7 @@ export async function POST(req: NextRequest){
 
             message = await anthropic.messages.create({
                 model: 'claude-sonnet-4-6',
-                max_tokens: 4096,
+                max_tokens: 8096,
                 messages: [
                     {
                         role: 'user',
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest){
         }
 
         const responseText = message.content.filter(block => block.type === 'text').map(block => block.text).join('')
-        const cleanedResponse = responseText.replace(/```json/g, '').replace(/```/g, '').trim()
+        const cleanedResponse = responseText.replace(/```json/g, '').replace(/```/g, '').replace(/^[^{]*/s, '').replace(/[^}]*$/s, '').trim()
         const itinerary: Itinerary = JSON.parse(cleanedResponse)
         
         return NextResponse.json(itinerary)

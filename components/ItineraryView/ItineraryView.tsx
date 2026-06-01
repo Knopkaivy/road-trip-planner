@@ -7,8 +7,10 @@ import DayCard from '../DayCard/DayCard'
 import { ChevronIcon } from '../icons/UIIcons'
 import styles from './ItineraryView.module.scss'
 
+const MOBILE_MAX_WIDTH = 480
+const MOBILE_MAP_HEIGHT = 300
+
 export default function ItineraryView(){
-    const MOBILE_MAX_WIDTH = 480
     const {itinerary, reset} = useTripStore()
     const [isExpanded, setIsExpanded] = useState<boolean>(true)
     const contentLeftRef = useRef<HTMLDivElement | null>(null)
@@ -40,9 +42,9 @@ export default function ItineraryView(){
         if(window.innerWidth > MOBILE_MAX_WIDTH) return
         const headingHeight = headingRef.current.getBoundingClientRect().height
         if(expanded){
-            contentRightRef.current.style.height = `${headingHeight + 300}px`
+            contentRightRef.current.style.height = `${headingHeight + MOBILE_MAP_HEIGHT}px`
         } else {
-            contentRightRef.current.style.height = `${headingHeight}px`
+            contentRightRef.current.style.height = `${headingHeight +10}px`
         }
     }
 

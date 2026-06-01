@@ -122,8 +122,7 @@
   text-transform: uppercase;
 }
 
-
-@media (max-width: v.$bp-sm){
+@media (max-width: v.$bp-md){
   .card{
     padding: v.$space-sm;
   }
