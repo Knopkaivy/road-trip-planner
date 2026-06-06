@@ -119,6 +119,5 @@ reset()     → clears all state, returns to TripForm
 
 ## Phase 2 (Post-MVP)
 - 🗺️ Map integration (Mapbox)
-- 🌤️ Weather per stop
 - 💾 Save / share itinerary
 - ⚡ Streaming responses for faster perceived load time

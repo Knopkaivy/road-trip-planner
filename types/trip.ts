@@ -26,14 +26,17 @@ export interface Day {
   overnight: string
 }
 
-export interface Itinerary {
-  origin: string,
-  originCoordinates: [number, number],
+export interface ItineraryMeta {
+  origin: string
   destination: string
-  destinationCoordinates: [number, number],
   totalDays: number
   totalMiles: number
   vibe: string
+  originCoordinates: [number, number]
+  destinationCoordinates: [number, number]
+}
+
+export interface Itinerary extends ItineraryMeta {
   days: Day[]
 }
 

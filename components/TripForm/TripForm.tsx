@@ -15,7 +15,15 @@ const VIBES = [
 ]
 
 export default function TripForm(){
-    const {setFormData, setItinerary, setLoading, setError, isLoading} = useTripStore()
+    const {setFormData, setItinerary, 
+        setLoading, 
+        setError,  
+        setStreamedMeta,
+        addStreamedDay,
+        setIsStreaming,
+        finalizeItinerary, 
+        isLoading
+} = useTripStore()
     const [form, setForm] = useState<TripFormData>({
         origin: '',
         destination: '',
@@ -41,15 +49,72 @@ export default function TripForm(){
                 body: JSON.stringify(form)
             })
             if(!res.ok) throw new Error('Failed to generate itinerary')
+            if (!res.body) throw new Error('No stream body received')
+
+            const reader = res.body.getReader()
+            const decoder = new TextDecoder()
+            let buffer = ''
+            let metaReceived = false
+
+            setIsStreaming(true)
+            setLoading(false)
             
-                const itinerary = await res.json()
-                setItinerary(itinerary)
+            // Read stream chunk by chunk
+            while (true) {
+            const { done, value } = await reader.read()
+
+            if (done) {
+                // Handle any remaining content in buffer
+                const remaining = buffer.trim()
+                if (remaining.startsWith('{')) {
+                try {
+                    const day = JSON.parse(remaining)
+                    addStreamedDay(day)
+                } catch {
+                    console.error('❌ Final buffer parse failed:', remaining)
+                }
+                }
+                // Stream complete — assemble final itinerary
+                finalizeItinerary()
+                break
+            }
+
+            // Decode incoming chunk and add to buffer
+            buffer += decoder.decode(value, { stream: true })
+
+            // Process complete lines
+            const lines = buffer.split('\n')
+
+            // All lines except last are complete
+            for (let i = 0; i < lines.length - 1; i++) {
+                const line = lines[i].trim()
+                if (!line.startsWith('{')) continue
+
+                try {
+                const parsed = JSON.parse(line)
+
+                if (!metaReceived) {
+                    // First line is always meta
+                    setStreamedMeta(parsed)
+                    metaReceived = true
+                } else {
+                    // Subsequent lines are days
+                    addStreamedDay(parsed)
+                }
+                } catch {
+                console.error('❌ Line parse failed:', line)
+                }
+            }
+
+            // Keep incomplete last line in buffer
+            buffer = lines[lines.length - 1]
+            }
         } catch(err){
             setError('Something went wtrong. Please try again.')
-            console.error(err)
-        } finally{
+            setIsStreaming(false)
             setLoading(false)
-        }
+            console.error(err)
+        } 
     }
 
     return(

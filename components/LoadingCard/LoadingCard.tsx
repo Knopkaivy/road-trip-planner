@@ -1,0 +1,31 @@
+'use client'
+
+import styles from './LoadingCard.module.scss'
+
+const MESSAGES = [
+  'Scouting the best scenic routes...',
+  'Finding hidden roadside gems...',
+  'Checking out local food spots...',
+  'Plotting the perfect stops...',
+  'Almost ready to hit the road...',
+]
+
+export default function LoadingCard(){
+    return(
+        <div className={styles.card}>
+
+            <h2 className={styles.title}>Planning your road trip</h2>
+
+            <div className={styles.messages}>
+                {MESSAGES.map((msg, index) => (
+                    <p className={styles.message} key={index}>{msg}</p>
+                ))}
+            </div>
+            <div className={styles.dots}>
+                <span style={{animationDelay: '0s'}}></span>
+                <span style={{animationDelay: '0.2s'}}></span>
+                <span style={{animationDelay: '0.4s'}}></span>
+            </div>
+        </div>
+    )
+}

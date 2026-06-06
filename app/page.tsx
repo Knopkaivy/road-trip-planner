@@ -6,10 +6,10 @@ import LoadingState from "@/components/LoadingState/LoadingState";
 import ItineraryView from "@/components/ItineraryView/ItineraryView";
 
 export default function Home() {
-  const {itinerary, isLoading} = useTripStore()
+  const {itinerary, isLoading, isStreaming} = useTripStore()
 
 if(isLoading)   return <LoadingState/>
-  if(itinerary) return <ItineraryView/>
+  if(isStreaming || itinerary) return <ItineraryView/>
   return <TripForm/>
 
 }
