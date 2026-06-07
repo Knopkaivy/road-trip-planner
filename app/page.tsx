@@ -12,7 +12,7 @@ type View = 'form' | 'saved'
 
 export default function Home() {
   const {itinerary, isLoading, isStreaming} = useTripStore()
-  const [view, setView] = useState<View>('saved')
+  const [view, setView] = useState<View>('form')
   const [hasSavedTrips, setHasSavedTrips] = useState(false)
   const [fromSaved, setFromSaved] = useState(false)
 
