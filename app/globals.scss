@@ -60,6 +60,8 @@ html {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen, Ubuntu, sans-serif;
   -webkit-font-smoothing: antialiased;
+  scrollbar-color: var(--color-accent-muted) var(--color-bg-primary) ;
+  scrollbar-width: thin;
 }
 
 html,

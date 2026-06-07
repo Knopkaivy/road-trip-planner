@@ -34,15 +34,14 @@ export default function SavedTrips({onNewTrip, onTripChange, onLoad}: SavedTrips
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.inner}>
-                <div className={styles.header}>
-                    <div className={styles.headerText}>
-                        <h1 className={styles.title}>Your Saved Trips</h1>
-                        <p className={styles.subtitle}>Pick up where you left off</p>
-                    </div>
+            <div className={styles.hero}>
+                <div className={styles.heroInner}>
+                    <h1 className={styles.title}>Your Saved Trips</h1>
+                    <button className={styles.newTripButton} onClick={onNewTrip} >Plan New Trip</button>
                 </div>
-                <button className={styles.newTripButton} onClick={onNewTrip} >Plan New Trip</button>
+            </div>
 
+            <div className={styles.inner}>
                 <div className={styles.list}>
                     {trips.map(trip =>(
                         <div className={styles.card} key={trip.id} >

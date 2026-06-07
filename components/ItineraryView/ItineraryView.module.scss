@@ -158,19 +158,19 @@
 
   &:hover:not(:disabled) {
     background: var(--color-surface-hover);
-    border-color: var(--color-accent);
+    border-color: v.$color-accent;
   }
 
   &:disabled {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
+    color: v.$color-accent;
+    border-color: v.$color-accent;
     cursor: not-allowed;
     opacity: 0.8;
   }
 }
 
 .resetButton {
-  background: var(--color-accent);
+  background: v.$color-accent;
   border: none;
   border-radius: v.$radius-md;
   color: v.$color-text-white;
@@ -243,7 +243,7 @@
   .content {
     align-items: flex-start;
     flex-direction: column-reverse;
-    height: calc(100vh - 7.1875rem);
+    height: calc(100vh - 10.4375rem);
     justify-content: center;
     gap: 0;
     padding: 10rem 0 0 0;
@@ -305,11 +305,12 @@
   }
 
   .footer{
+    flex-direction: column;
     padding-left: v.$space-md;
     padding-right: v.$space-md;
   }
 
-  .resetButton{
+  .saveButton, .resetButton{
     width: 100%;
   }
 }

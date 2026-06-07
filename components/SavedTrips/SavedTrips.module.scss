@@ -5,42 +5,32 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: v.$space-2xl v.$space-lg;
   background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 50%, var(--color-bg-tertiary) 100%);
 }
 
-.inner {
+
+// --- Hero ---
+.hero {
+  background: var(--color-bg-primary);
+  padding: v.$space-lg;
+  position: fixed;
   width: 100%;
-  max-width: 640px;
-  display: flex;
-  flex-direction: column;
-  gap: v.$space-xl;
 }
 
-// --- Header ---
-.header {
+.heroInner {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  height: 7rem;
   justify-content: space-between;
-  gap: v.$space-lg;
-}
-
-.headerText {
-  display: flex;
-  flex-direction: column;
-  gap: v.$space-xs;
+  align-items: start;
+  max-width: v.$max-width;
+  margin: 0 auto;
 }
 
 .title {
   color: var(--color-text);
   font-size: clamp(1.4rem, 4vw, 2rem);
   font-weight: 700;
-  margin: 0;
-}
-
-.subtitle {
-  color: var(--color-text-muted);
-  font-size: v.$font-size-sm;
   margin: 0;
 }
 
@@ -52,7 +42,7 @@
   cursor: pointer;
   font-size: v.$font-size-sm;
   font-weight: 600;
-  padding: v.$space-sm v.$space-lg;
+  padding: v.$space-md v.$space-2xl;
   white-space: nowrap;
   transition: background v.$transition-fast;
   flex-shrink: 0;
@@ -60,6 +50,16 @@
   &:hover {
     background: rgba(var(--color-accent-rgb), 0.85);
   }
+}
+
+.inner {
+  width: 100%;
+  max-width: v.$max-width;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-xl;
+  margin-top: 10rem;
+  padding: v.$space-md 0;
 }
 
 // --- List ---
@@ -168,5 +168,11 @@
   .newTripButton {
     width: 100%;
     text-align: center;
+  }
+}
+
+@media (max-width: v.$bp-sm){
+  .card{
+    border-radius: 0;
   }
 }
