@@ -1,0 +1,172 @@
+@use '@/app/variables' as v;
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: v.$space-2xl v.$space-lg;
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 50%, var(--color-bg-tertiary) 100%);
+}
+
+.inner {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-xl;
+}
+
+// --- Header ---
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: v.$space-lg;
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-xs;
+}
+
+.title {
+  color: var(--color-text);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  font-size: v.$font-size-sm;
+  margin: 0;
+}
+
+.newTripButton {
+  background: var(--color-accent);
+  border: none;
+  border-radius: v.$radius-md;
+  color: v.$color-text-white;
+  cursor: pointer;
+  font-size: v.$font-size-sm;
+  font-weight: 600;
+  padding: v.$space-sm v.$space-lg;
+  white-space: nowrap;
+  transition: background v.$transition-fast;
+  flex-shrink: 0;
+
+  &:hover {
+    background: rgba(var(--color-accent-rgb), 0.85);
+  }
+}
+
+// --- List ---
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-md;
+}
+
+// --- Card ---
+.card {
+  display: flex;
+  align-items: stretch;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: v.$radius-lg;
+  overflow: hidden;
+  transition: border-color v.$transition-fast, background v.$transition-fast;
+
+  &:hover {
+    border-color: var(--color-accent);
+    background: var(--color-surface-hover);
+  }
+}
+
+.cardMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  padding: v.$space-lg;
+  cursor: pointer;
+  gap: v.$space-md;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-xs;
+}
+
+.cardLabel {
+  color: var(--color-text);
+  font-size: v.$font-size-sm;
+  font-weight: 600;
+  margin: 0;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: v.$space-xs;
+  color: var(--color-text-secondary);
+  font-size: v.$font-size-xs;
+}
+
+.dot {
+  color: var(--color-text-muted);
+}
+
+.vibe {
+  text-transform: capitalize;
+}
+
+.date {
+  color: var(--color-text-muted);
+  font-size: v.$font-size-xxs;
+}
+
+.cardArrow {
+  color: var(--color-text-muted);
+  font-size: v.$font-size-sm;
+  flex-shrink: 0;
+  transition: transform v.$transition-fast, color v.$transition-fast;
+
+  .cardMain:hover & {
+    transform: translateX(4px);
+    color: var(--color-accent);
+  }
+}
+
+// --- Delete ---
+.deleteButton {
+  background: transparent;
+  border: none;
+  border-left: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-size: v.$font-size-xs;
+  padding: 0 v.$space-md;
+  transition: background v.$transition-fast, color v.$transition-fast;
+  flex-shrink: 0;
+
+  &:hover {
+    background: rgba(var(--color-accent-rgb), 0.1);
+    color: var(--color-accent);
+  }
+}
+
+// --- Mobile ---
+@media (max-width: v.$bp-md) {
+  .header {
+    flex-direction: column;
+  }
+
+  .newTripButton {
+    width: 100%;
+    text-align: center;
+  }
+}

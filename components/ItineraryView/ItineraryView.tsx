@@ -2,16 +2,23 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useTripStore } from '@/store/useTripStore'
+import { saveTrip } from '@/lib/storageUtils'
 import Map from '../Map/Map'
 import DayCard from '../DayCard/DayCard'
 import { ChevronIcon } from '../icons/UIIcons'
 import styles from './ItineraryView.module.scss'
 import LoadingCard from '../LoadingCard/LoadingCard'
 
+interface ItineraryViewProps {
+    onPlanAnother: () => void,
+    onTripChange: () => void,
+    fromSaved?: boolean
+}
+
 const MOBILE_MAX_WIDTH = 480
 const MOBILE_MAP_HEIGHT = 300
 
-export default function ItineraryView(){
+export default function ItineraryView({onPlanAnother, onTripChange, fromSaved = false}: ItineraryViewProps){
     const {
         itinerary,
         reset,
@@ -20,6 +27,7 @@ export default function ItineraryView(){
         streamedDays,
     } = useTripStore()
     const [isExpanded, setIsExpanded] = useState<boolean>(true)
+    const [isSaved, setIsSaved] = useState(fromSaved)
     const contentLeftRef = useRef<HTMLDivElement | null>(null)
     const contentRightRef = useRef<HTMLDivElement | null >(null)
     const headingRef = useRef<HTMLDivElement | null >(null)
@@ -53,6 +61,18 @@ export default function ItineraryView(){
         } else {
             contentRightRef.current.style.height = `${headingHeight +10}px`
         }
+    }
+
+    const handleSave = () =>{
+        if(!itinerary) return
+        saveTrip(itinerary)
+        setIsSaved(true)
+        onTripChange()
+    }
+
+    const handlePlanAnother = () =>{
+        reset()
+        onPlanAnother()
     }
 
     if(!streamedMeta && !itinerary) return null
@@ -120,7 +140,8 @@ export default function ItineraryView(){
             </div>
 
             <div className={styles.footer}>
-                <button className={styles.resetButton} onClick={reset}>Plan Another Trip</button>
+                <button className={styles.saveButton} onClick={handleSave} disabled={isSaved || isStreaming}>{isSaved ? 'Trip Saved' : 'Save Trip'}</button>
+                <button className={styles.resetButton} onClick={handlePlanAnother} disabled={isStreaming}>Plan Another Trip</button>
             </div>
         </div>
     )

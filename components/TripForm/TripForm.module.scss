@@ -90,7 +90,7 @@
   background: var(--color-accent);
   border: none;
   border-radius: v.$radius-md;
-  color: var(--color-text);
+  color: v.$color-text-white;
   cursor: pointer;
   font-size: v.$font-size-sm;
   font-weight: 600;
@@ -106,6 +106,26 @@
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+}
+
+.savedTripsButton {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: v.$radius-md;
+  color: v.$color-accent;
+  cursor: pointer;
+  font-size: v.$font-size-sm;
+  font-weight: 600;
+  padding: v.$space-md;
+  white-space: nowrap;
+  transition: background v.$transition-fast, border-color v.$transition-fast;
+  flex-shrink: 0;
+  margin-top: v.$space-lg;
+
+  &:hover {
+    background: var(--color-surface-hover);
+    border-color: var(--color-accent);
   }
 }
 

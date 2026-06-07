@@ -5,6 +5,11 @@ import { useTripStore } from "@/store/useTripStore"
 import { TripFormData } from "@/types/trip"
 import styles from './TripForm.module.scss'
 
+interface TripFormProps {
+    hasSavedTrips: boolean,
+    onViewSaved: () => void
+}
+
 const VIBES = [
     {value: 'scenic', label: 'Scenic & Nature'},
     {value: 'foodie', label: 'Foodie Adventure'},
@@ -14,8 +19,8 @@ const VIBES = [
     {value: 'relaxed', label: 'Slow & Relaxed'},
 ]
 
-export default function TripForm(){
-    const {setFormData, setItinerary, 
+export default function TripForm({hasSavedTrips, onViewSaved}: TripFormProps){
+    const {setFormData, 
         setLoading, 
         setError,  
         setStreamedMeta,
@@ -149,6 +154,9 @@ export default function TripForm(){
                     </div>
                     <button className={styles.button} type="submit" disabled={isLoading}>{isLoading ? 'Planning your trip...' : 'Plan My Trip'}</button>
                 </form>
+                {
+                    hasSavedTrips && <button className={styles.savedTripsButton} type="button" onClick={onViewSaved}>Saved Trips</button>
+                }
             </div>
         </div>
     )

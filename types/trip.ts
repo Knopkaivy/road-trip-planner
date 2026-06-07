@@ -46,3 +46,10 @@ export interface TripFormData {
   days: number
   vibe: string
 }
+
+export interface SavedTrip {
+  id: string,
+  savedAt: string,
+  label: string,
+  itinerary: Itinerary
+}
