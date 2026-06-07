@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useTripStore } from '@/store/useTripStore'
-import { saveTrip } from '@/lib/storageUtils'
+import { formatItineraryText, saveTrip } from '@/lib/storageUtils'
 import Map from '../Map/Map'
 import DayCard from '../DayCard/DayCard'
 import { ChevronIcon } from '../icons/UIIcons'
@@ -28,6 +28,7 @@ export default function ItineraryView({onPlanAnother, onTripChange, fromSaved = 
     } = useTripStore()
     const [isExpanded, setIsExpanded] = useState<boolean>(true)
     const [isSaved, setIsSaved] = useState(fromSaved)
+    const [isCopied, setIsCopied] = useState(false)
     const contentLeftRef = useRef<HTMLDivElement | null>(null)
     const contentRightRef = useRef<HTMLDivElement | null >(null)
     const headingRef = useRef<HTMLDivElement | null >(null)
@@ -61,6 +62,18 @@ export default function ItineraryView({onPlanAnother, onTripChange, fromSaved = 
         } else {
             contentRightRef.current.style.height = `${headingHeight +10}px`
         }
+    }
+
+    const handleCopy = async () =>{
+        if(!itinerary) return
+        try {
+            await navigator.clipboard.writeText(formatItineraryText(itinerary))
+            setIsCopied(true)
+            setTimeout(()=> setIsCopied(false), 2000)
+        } catch {
+            console.error('Failed to copy to clipboard')
+        }
+
     }
 
     const handleSave = () =>{
@@ -140,6 +153,7 @@ export default function ItineraryView({onPlanAnother, onTripChange, fromSaved = 
             </div>
 
             <div className={styles.footer}>
+                <button className={styles.copyButton} onClick={handleCopy} disabled={isCopied || isStreaming}>{isCopied ? 'Copied' : 'Copy to Clipboard'}</button>
                 <button className={styles.saveButton} onClick={handleSave} disabled={isSaved || isStreaming}>{isSaved ? 'Trip Saved' : 'Save Trip'}</button>
                 <button className={styles.resetButton} onClick={handlePlanAnother} disabled={isStreaming}>Plan Another Trip</button>
             </div>
